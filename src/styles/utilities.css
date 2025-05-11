@@ -4,7 +4,7 @@
 @layer utilities {
   /* Animation utilities */
   .hover-scale {
-    @apply transition-transform hover:scale-105 duration-300;
+    @apply transition-transform hover:scale-102 duration-300;
   }
 
   .fade-in {
@@ -15,46 +15,34 @@
     animation: slideUp 0.5s ease-out forwards;
   }
   
-  .pulse-glow {
-    animation: pulseGlow 2s infinite;
-  }
-  
-  .hover-glow {
-    @apply hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-shadow duration-300;
-  }
-
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(0, 245, 255, 0.3);
-    border-radius: 4px;
+    background: rgba(100, 116, 240, 0.3);
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 245, 255, 0.5);
+    background: rgba(100, 116, 240, 0.5);
   }
 
-  /* Button glow effect */
+  /* Button styles */
   .btn-glow:hover {
-    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+    box-shadow: 0 0 15px rgba(100, 116, 240, 0.3);
   }
 
-  /* Enhanced background gradients */
-  .bg-gradient-blue-purple {
-    @apply bg-gradient-to-br from-[#00F5FF] to-[#B026FF];
-  }
-
-  .bg-gradient-blue-purple-subtle {
-    @apply bg-gradient-to-br from-[#00F5FF]/30 to-[#B026FF]/20;
+  /* Background gradients */
+  .bg-gradient-blue {
+    @apply bg-gradient-to-r from-primary to-primary/80;
   }
 
   /* Motion effects */
@@ -63,43 +51,24 @@
   }
 
   .hover-expand {
-    @apply transition-transform duration-300 hover:scale-105;
+    @apply transition-transform duration-300 hover:scale-102;
   }
 
   /* Card and element borders */
-  .border-glow {
-    @apply border border-[#00F5FF]/30;
+  .border-highlight {
+    @apply border border-primary/30;
   }
 
-  .border-glow-hover:hover {
-    @apply border-[#00F5FF]/50 shadow-[0_0_10px_rgba(0,245,255,0.3)];
-  }
-
-  /* Digital effects */
-  .digital-noise {
-    @apply relative overflow-hidden;
-  }
-  
-  .digital-noise::after {
-    @apply content-[''] absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay pointer-events-none;
-    animation: noise 8s steps(10) infinite;
-  }
-
-  /* Neobrutalism styles */
-  .neobrutalism {
-    @apply border-4 border-black relative shadow-brutal-md transition-all duration-300;
-  }
-  
-  .neobrutalism:hover {
-    @apply shadow-brutal-lg transform translate-x-[-2px] translate-y-[-2px];
+  .border-highlight-hover:hover {
+    @apply border-primary/50 shadow-sm;
   }
 
   /* Additional utility classes */
-  .hover-shadow-lg {
-    @apply transition-shadow duration-300 hover:shadow-lg;
+  .hover-shadow-sm {
+    @apply transition-shadow duration-300 hover:shadow-sm;
   }
 
-  .focus-glow {
-    @apply focus:ring-2 focus:ring-[#9b87f5] focus:ring-opacity-50;
+  .focus-ring {
+    @apply focus:ring-2 focus:ring-primary focus:ring-opacity-50;
   }
 }
