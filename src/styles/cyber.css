@@ -1,62 +1,24 @@
 
 @layer components {
-  /* Cyber UI Styles */
-  .cyber-terminal {
-    @apply font-mono text-[#00F5FF] bg-[#070A14] border border-[#00F5FF]/30 p-4 rounded-lg;
-    background-image: linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-                     linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
+  /* Minimal UI Styles */
+  .terminal {
+    @apply font-mono text-white bg-[#111] border border-white/20 p-4 rounded;
   }
   
-  .cyber-heading {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-[#00F5FF] to-[#B026FF] relative;
+  .minimal-heading {
+    @apply text-white relative;
   }
   
-  .cyber-heading::after {
-    @apply content-[''] absolute bottom-0 left-0 h-[1px] w-full bg-gradient-to-r from-[#00F5FF]/80 to-[#B026FF]/80;
-    animation: cyber-scan 3s ease-in-out infinite;
+  .minimal-heading::after {
+    @apply content-[''] absolute bottom-0 left-0 h-[1px] w-full bg-white/20;
   }
   
-  .cyber-button {
-    @apply relative bg-transparent border border-[#00F5FF]/50 text-[#00F5FF] py-2 px-4 
-      overflow-hidden transition-all duration-300 hover:bg-[#00F5FF]/10 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)];
+  .minimal-button {
+    @apply relative bg-transparent border border-white/30 text-white py-2 px-4 
+      transition-all duration-300 hover:bg-white/5;
   }
   
-  .cyber-button::after {
-    @apply content-[''] absolute inset-0 bg-gradient-to-r from-[#00F5FF]/0 via-[#00F5FF]/20 to-[#00F5FF]/0;
-    animation: cyber-scan 2s ease-in-out infinite;
-    transform: skewX(-45deg) translateX(-150%);
-  }
-  
-  .cyber-grid {
-    background-image: linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
-                     linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* Cyber card styles */
-  .cyber-card {
-    @apply relative border-l-2 border-t-2 border-[#00F5FF]/50 bg-[#0F1122]/80 overflow-hidden;
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
-  }
-
-  .neon-text {
-    @apply relative;
-    text-shadow: 0 0 5px rgba(0, 245, 255, 0.8), 0 0 10px rgba(0, 245, 255, 0.5);
-  }
-  
-  .neon-border {
-    @apply relative overflow-hidden;
-    box-shadow: 0 0 5px rgba(0, 245, 255, 0.5), inset 0 0 5px rgba(0, 245, 255, 0.5);
-  }
-  
-  .neon-border::after {
-    @apply content-[''] absolute top-0 left-[-100%] right-0 bottom-0 bg-gradient-to-r from-transparent via-[#00F5FF]/20 to-transparent;
-    animation: neon-scan 3s ease-in-out infinite;
-  }
-
-  .tech-border {
-    @apply relative before:absolute before:inset-0 before:p-[2px] before:rounded-lg overflow-hidden;
-    @apply before:bg-gradient-to-r before:from-[#00F5FF] before:to-[#B026FF] before:-z-10;
+  .minimal-card {
+    @apply relative border border-white/20 bg-[#111] overflow-hidden;
   }
 }
