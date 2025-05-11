@@ -3,9 +3,10 @@ import React, { useEffect, useRef } from "react";
 
 interface BackgroundEffectsProps {
   variant?: 'default' | 'vibrant' | 'subtle';
+  animated?: boolean;
 }
 
-const BackgroundEffects = ({ variant = 'default' }: BackgroundEffectsProps) => {
+const BackgroundEffects = ({ variant = 'default', animated = true }: BackgroundEffectsProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -23,6 +24,15 @@ const BackgroundEffects = ({ variant = 'default' }: BackgroundEffectsProps) => {
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
+
+    // Skip animation if animated is false
+    if (!animated) {
+      // Just draw a static version
+      drawStaticBackground(ctx, canvas, variant);
+      return () => {
+        window.removeEventListener('resize', resizeCanvas);
+      };
+    }
 
     // Particle configuration
     const particleCount = variant === 'vibrant' ? 50 : variant === 'subtle' ? 25 : 35;
@@ -104,7 +114,28 @@ const BackgroundEffects = ({ variant = 'default' }: BackgroundEffectsProps) => {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [variant]);
+  }, [variant, animated]);
+
+  // Function to draw a static background when animation is disabled
+  const drawStaticBackground = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, variant: string) => {
+    const particleCount = variant === 'vibrant' ? 30 : variant === 'subtle' ? 15 : 20;
+    const particleSize = variant === 'vibrant' ? 1.5 : 1;
+    const particleColor = variant === 'vibrant' 
+      ? ['rgba(155, 135, 245, 0.4)', 'rgba(58, 54, 224, 0.3)', 'rgba(110, 89, 165, 0.35)']
+      : ['rgba(155, 135, 245, 0.25)', 'rgba(58, 54, 224, 0.2)', 'rgba(110, 89, 165, 0.2)'];
+
+    // Draw some static particles
+    for (let i = 0; i < particleCount; i++) {
+      const size = Math.random() * particleSize + 0.5;
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = particleColor[Math.floor(Math.random() * particleColor.length)];
+      ctx.fill();
+    }
+  };
 
   return (
     <canvas 

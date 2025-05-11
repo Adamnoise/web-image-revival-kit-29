@@ -16,6 +16,12 @@ interface StatsCardProps {
   variant?: "default" | "cyber" | "neon";
   className?: string;
   iconClassName?: string;
+  color?: string;
+  trend?: {
+    value: number;
+    isPositive?: boolean;
+  };
+  delay?: number;
 }
 
 const StatsCard = ({ 
@@ -25,7 +31,10 @@ const StatsCard = ({
   icon: Icon, 
   variant = "default",
   className,
-  iconClassName
+  iconClassName,
+  color,
+  trend,
+  delay = 0
 }: StatsCardProps) => {
   const variantStyles = {
     default: {
@@ -59,11 +68,15 @@ const StatsCard = ({
   
   const style = variantStyles[variant];
   
+  // Use either change or trend object depending on what's provided
+  const trendData = trend || change;
+  const isPositive = trend ? trend.isPositive : change?.positive;
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5, delay: delay * 0.1 }}
       className={className}
     >
       <Card className={cn("overflow-hidden", style.card)}>
@@ -74,12 +87,12 @@ const StatsCard = ({
               <div className="flex items-end gap-2">
                 <h3 className={cn("text-2xl font-bold", style.value)}>{value}</h3>
                 
-                {change && (
+                {trendData && (
                   <div className={cn(
                     "text-xs font-medium flex items-center gap-0.5",
-                    change.positive ? style.change.positive : style.change.negative
+                    isPositive ? style.change.positive : style.change.negative
                   )}>
-                    {change.positive ? '↑' : '↓'} {change.value}
+                    {isPositive ? '↑' : '↓'} {trendData.value}
                   </div>
                 )}
               </div>

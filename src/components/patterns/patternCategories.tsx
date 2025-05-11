@@ -1,5 +1,6 @@
 
 import { BarChart2, Layers, Diamond, Grid, PieChart, Zap, Network, Flashlight, Compass } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import React from "react";
 
 export interface PatternCategory {
@@ -9,7 +10,7 @@ export interface PatternCategory {
   color: string;
   secondaryColor: string;
   complexity: number; // 1-10 scale for visualization
-  icon: React.ReactNode;
+  icon: LucideIcon;
   count: number;
   effectivity?: number; // 0-100%
 }
@@ -24,7 +25,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     complexity: 8,
     count: 14,
     effectivity: 87,
-    icon: <Zap className="h-8 w-8 text-white" />
+    icon: Zap
   },
   { 
     id: "defensive", 
@@ -35,7 +36,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     complexity: 7,
     count: 12,
     effectivity: 74,
-    icon: <Layers className="h-8 w-8 text-white" /> 
+    icon: Layers
   },
   { 
     id: "possession", 
@@ -46,7 +47,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     complexity: 6,
     count: 9,
     effectivity: 82,
-    icon: <Network className="h-8 w-8 text-white" />
+    icon: Network
   },
   { 
     id: "transition", 
@@ -57,7 +58,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     complexity: 9,
     count: 8,
     effectivity: 68,
-    icon: <Compass className="h-8 w-8 text-white" />
+    icon: Compass
   },
   { 
     id: "setpiece", 
@@ -68,6 +69,6 @@ export const getPatternCategories = (): PatternCategory[] => [
     complexity: 5,
     count: 7,
     effectivity: 90,
-    icon: <Flashlight className="h-8 w-8 text-white" />
+    icon: Flashlight
   }
 ];
