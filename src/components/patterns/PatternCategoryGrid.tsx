@@ -2,15 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import PatternCard from "./PatternCard";
-import { LucideIcon } from "lucide-react";
-
-interface PatternCategory {
-  id: string;
-  title: string;
-  description: string;
-  color: string;
-  icon: React.ReactNode;
-}
+import { PatternCategory } from "./patternCategories";
 
 interface PatternCategoryGridProps {
   categories: PatternCategory[];
@@ -33,19 +25,45 @@ const PatternCategoryGrid = ({ categories, filter = "all" }: PatternCategoryGrid
         }
       });
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+  
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
       {filteredCategories.map((category, index) => (
-        <PatternCard 
-          key={category.id}
-          title={category.title}
-          description={category.description}
-          color={category.color}
-          icon={category.icon}
-          index={index}
-        />
+        <motion.div key={category.id} variants={item}>
+          <PatternCard 
+            title={category.title}
+            description={category.description}
+            color={category.color}
+            secondaryColor={category.secondaryColor}
+            icon={category.icon}
+            index={index}
+            complexity={category.complexity}
+            count={category.count}
+            effectivity={category.effectivity}
+          />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

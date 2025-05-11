@@ -1,20 +1,40 @@
 
-import { BarChart2, Layers, Diamond, Grid, PieChart } from "lucide-react";
+import { BarChart2, Layers, Diamond, Grid, PieChart, Zap, Network, Flashlight, Compass } from "lucide-react";
 import React from "react";
 
-export const getPatternCategories = () => [
+export interface PatternCategory {
+  id: string;
+  title: string;
+  description: string;
+  color: string;
+  secondaryColor: string;
+  complexity: number; // 1-10 scale for visualization
+  icon: React.ReactNode;
+  count: number;
+  effectivity?: number; // 0-100%
+}
+
+export const getPatternCategories = (): PatternCategory[] => [
   { 
     id: "offensive", 
     title: "Offensive Patterns", 
     description: "Analyze attacking strategies and movement patterns",
     color: "#00F5FF",
-    icon: <BarChart2 className="h-8 w-8 text-white" />
+    secondaryColor: "#0099FF",
+    complexity: 8,
+    count: 14,
+    effectivity: 87,
+    icon: <Zap className="h-8 w-8 text-white" />
   },
   { 
     id: "defensive", 
     title: "Defensive Patterns", 
     description: "Discover defensive positioning and pressure tactics",
     color: "#B026FF", 
+    secondaryColor: "#8A2BE2",
+    complexity: 7,
+    count: 12,
+    effectivity: 74,
     icon: <Layers className="h-8 w-8 text-white" /> 
   },
   { 
@@ -22,20 +42,32 @@ export const getPatternCategories = () => [
     title: "Possession Patterns", 
     description: "Review ball control and passing sequences",
     color: "#FAFF00", 
-    icon: <Diamond className="h-8 w-8 text-white" />
+    secondaryColor: "#FFD700",
+    complexity: 6,
+    count: 9,
+    effectivity: 82,
+    icon: <Network className="h-8 w-8 text-white" />
   },
   { 
     id: "transition", 
     title: "Transition Patterns", 
     description: "Examine quick counter-attacks and defensive recovery",
     color: "#00F5FF",
-    icon: <Grid className="h-8 w-8 text-white" />
+    secondaryColor: "#4ECDC4",
+    complexity: 9,
+    count: 8,
+    effectivity: 68,
+    icon: <Compass className="h-8 w-8 text-white" />
   },
   { 
     id: "setpiece", 
     title: "Set Piece Patterns", 
     description: "Analyze corner kicks, free kicks and penalties",
     color: "#B026FF", 
-    icon: <PieChart className="h-8 w-8 text-white" />
+    secondaryColor: "#8A2BE2",
+    complexity: 5,
+    count: 7,
+    effectivity: 90,
+    icon: <Flashlight className="h-8 w-8 text-white" />
   }
 ];
