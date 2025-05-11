@@ -20,7 +20,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     id: "offensive", 
     title: "Offensive Patterns", 
     description: "Analyze attacking strategies and movement patterns",
-    color: "#00F5FF",
+    color: "#00F5FF", // Use IQON's cyan color
     secondaryColor: "#0099FF",
     complexity: 8,
     count: 14,
@@ -31,7 +31,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     id: "defensive", 
     title: "Defensive Patterns", 
     description: "Discover defensive positioning and pressure tactics",
-    color: "#B026FF", 
+    color: "#B026FF", // Enhanced purple
     secondaryColor: "#8A2BE2",
     complexity: 7,
     count: 12,
@@ -42,7 +42,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     id: "possession", 
     title: "Possession Patterns", 
     description: "Review ball control and passing sequences",
-    color: "#FAFF00", 
+    color: "#FAFF00", // Bright yellow for accent
     secondaryColor: "#FFD700",
     complexity: 6,
     count: 9,
@@ -53,7 +53,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     id: "transition", 
     title: "Transition Patterns", 
     description: "Examine quick counter-attacks and defensive recovery",
-    color: "#00F5FF",
+    color: "#00F5FF", // Match IQON's cyan color
     secondaryColor: "#4ECDC4",
     complexity: 9,
     count: 8,
@@ -64,7 +64,7 @@ export const getPatternCategories = (): PatternCategory[] => [
     id: "setpiece", 
     title: "Set Piece Patterns", 
     description: "Analyze corner kicks, free kicks and penalties",
-    color: "#B026FF", 
+    color: "#B026FF", // Enhanced purple
     secondaryColor: "#8A2BE2",
     complexity: 5,
     count: 7,

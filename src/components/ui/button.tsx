@@ -24,6 +24,10 @@ const buttonVariants = cva(
         "cyber-filled": "bg-[#00F5FF] text-[#070A14] hover:bg-[#00F5FF]/90 hover:shadow-glow-blue-sm transition-all duration-300",
         "cyber-purple": "bg-transparent border border-[#B026FF] text-[#B026FF] hover:bg-[#B026FF]/10 hover:shadow-glow-purple-sm transition-all duration-300",
         "cyber-yellow": "bg-transparent border border-[#FAFF00] text-[#FAFF00] hover:bg-[#FAFF00]/10 hover:shadow-glow-yellow-sm transition-all duration-300",
+        // New IQON-style buttons
+        "iqon-primary": "bg-[#070A14] border border-[#00F5FF]/50 text-[#00F5FF] hover:bg-[#00F5FF]/10 hover:shadow-glow-blue-sm transition-all duration-300",
+        "iqon-secondary": "bg-[#00F5FF]/10 text-[#00F5FF] hover:bg-[#00F5FF]/20 hover:shadow-glow-blue-sm transition-all duration-300",
+        "iqon-accent": "bg-gradient-to-r from-[#00F5FF] to-[#0099FF] text-[#070A14] font-medium hover:shadow-glow-blue-sm transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

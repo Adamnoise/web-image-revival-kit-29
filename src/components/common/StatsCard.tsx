@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "../ui/card";
 import { LucideIcon } from "lucide-react";
+import { CircularProgress } from "../ui/circular-progress";
 
 interface StatsCardProps {
   title: string;
@@ -13,7 +14,7 @@ interface StatsCardProps {
     positive?: boolean;
   };
   icon?: LucideIcon;
-  variant?: "default" | "cyber" | "neon";
+  variant?: "default" | "cyber" | "neon" | "iqon";
   className?: string;
   iconClassName?: string;
   color?: string;
@@ -22,6 +23,8 @@ interface StatsCardProps {
     isPositive?: boolean;
   };
   delay?: number;
+  showGauge?: boolean;
+  gaugeValue?: number;
 }
 
 const StatsCard = ({ 
@@ -34,7 +37,9 @@ const StatsCard = ({
   iconClassName,
   color,
   trend,
-  delay = 0
+  delay = 0,
+  showGauge = false,
+  gaugeValue = 0
 }: StatsCardProps) => {
   const variantStyles = {
     default: {
@@ -63,6 +68,16 @@ const StatsCard = ({
         positive: "text-[#FAFF00]",
         negative: "text-[#FF00A0]"
       }
+    },
+    // New IQON-inspired style
+    iqon: {
+      card: "border-[#00F5FF]/20 bg-[#070A14]/90 backdrop-blur-md rounded-xl",
+      icon: "bg-[#070A14] border border-[#00F5FF]/30 text-[#00F5FF]",
+      value: "text-white font-medium",
+      change: {
+        positive: "text-[#00F5FF]",
+        negative: "text-[#FF3A5E]"
+      }
     }
   };
   
@@ -79,7 +94,7 @@ const StatsCard = ({
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       className={className}
     >
-      <Card className={cn("overflow-hidden", style.card)}>
+      <Card className={cn("overflow-hidden shadow-md hover:shadow-lg transition-all duration-300", style.card)}>
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -98,7 +113,16 @@ const StatsCard = ({
               </div>
             </div>
             
-            {Icon && (
+            {showGauge ? (
+              <div className="h-14 w-14">
+                <CircularProgress 
+                  value={gaugeValue} 
+                  size={56} 
+                  strokeWidth={6} 
+                  color={variant === 'neon' ? '#B026FF' : '#00F5FF'} 
+                />
+              </div>
+            ) : Icon && (
               <div className={cn(
                 "h-10 w-10 rounded-md flex items-center justify-center",
                 style.icon,
@@ -109,7 +133,7 @@ const StatsCard = ({
             )}
           </div>
           
-          {variant === "cyber" && (
+          {variant === "cyber" || variant === "iqon" ? (
             <div className="h-1 w-full bg-[#00F5FF]/10 mt-4 rounded-full overflow-hidden">
               <motion.div 
                 className="h-full bg-gradient-to-r from-[#00F5FF]/80 to-[#00F5FF]/20"
@@ -118,7 +142,7 @@ const StatsCard = ({
                 transition={{ duration: 0.8, delay: 0.2 }}
               ></motion.div>
             </div>
-          )}
+          ) : null}
         </CardContent>
       </Card>
     </motion.div>

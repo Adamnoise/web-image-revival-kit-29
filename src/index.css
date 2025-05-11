@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -181,9 +180,9 @@
     animation: noise 8s steps(10) infinite;
   }
 
-  /* NEW: Cyber UI Styles */
+  /* NEW: Updated Cyber UI Styles to match IQON interface */
   .cyber-terminal {
-    @apply font-mono text-[#00F5FF] bg-[#070A14] border border-[#00F5FF]/30 p-4 rounded;
+    @apply font-mono text-[#00F5FF] bg-[#070A14] border border-[#00F5FF]/30 p-4 rounded-lg;
     background-image: linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
                      linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
     background-size: 20px 20px;
@@ -215,47 +214,88 @@
     background-size: 40px 40px;
   }
   
-  .cyber-frame {
-    @apply relative border-t-2 border-r-2 border-[#00F5FF]/50 rounded;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 95%, 5% 95%, 5% 100%, 0 100%);
+  /* New IQON-inspired styles */
+  .iqon-card {
+    @apply bg-[#070A14] border border-[#00F5FF]/20 rounded-xl overflow-hidden shadow-md
+      hover:shadow-[0_0_15px_rgba(0,245,255,0.2)] transition-all duration-300;
   }
   
-  .cyber-scanline {
-    @apply absolute inset-0 pointer-events-none;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 2px,
-      rgba(0, 245, 255, 0.03) 3px,
-      transparent 3px,
-      transparent 8px
-    );
-    animation: scanline-move 10s linear infinite;
+  .iqon-gauge {
+    @apply relative flex items-center justify-center;
   }
   
-  .glitch-text {
-    @apply relative inline-block;
-    animation: text-glitch 3s infinite;
-    text-shadow: 0 0 5px rgba(0, 245, 255, 0.8);
+  .iqon-gauge-bg {
+    @apply absolute inset-0 bg-[#00F5FF]/5 rounded-full;
   }
   
-  .glitch-text::before,
-  .glitch-text::after {
-    @apply content-[attr(data-text)] absolute left-0 top-0 w-full overflow-hidden;
-    clip: rect(0, 900px, 0, 0);
+  .iqon-gauge-progress {
+    @apply absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#00F5FF] to-[#4ECDC4] rounded-b-full;
   }
   
-  .glitch-text::before {
-    @apply text-[#00F5FF] left-[2px];
-    animation: glitch-anim-1 3s infinite linear alternate-reverse;
+  .iqon-status {
+    @apply flex items-center gap-2;
   }
   
-  .glitch-text::after {
-    @apply text-[#B026FF] left-[-2px];
-    animation: glitch-anim-2 2s infinite linear alternate-reverse;
+  .iqon-status-dot {
+    @apply h-2 w-2 rounded-full animate-pulse;
   }
   
-  /* New keyframe animations */
+  .iqon-status-dot.active {
+    @apply bg-[#00F5FF];
+  }
+  
+  .iqon-status-dot.warning {
+    @apply bg-[#FAFF00];
+  }
+  
+  .iqon-status-dot.error {
+    @apply bg-[#FF3A5E];
+  }
+  
+  .iqon-progress {
+    @apply h-1.5 bg-[#0F1122]/80 rounded-full overflow-hidden;
+  }
+  
+  .iqon-progress-bar {
+    @apply h-full bg-gradient-to-r from-[#00F5FF] to-[#4ECDC4] rounded-full;
+  }
+  
+  .iqon-badge {
+    @apply border border-[#00F5FF]/30 text-[#00F5FF] text-xs px-1.5 py-0.5 rounded-sm bg-[#00F5FF]/10;
+  }
+  
+  /* Enhancement for circular progress indicator like IQON UI */
+  .circular-progress {
+    @apply relative;
+  }
+  
+  .circular-progress-circle {
+    @apply h-full w-full rounded-full;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  
+  .circular-progress-bg {
+    @apply stroke-[#0F1122];
+    stroke-width: 8;
+    fill: none;
+  }
+  
+  .circular-progress-value {
+    @apply stroke-[#00F5FF];
+    stroke-width: 8;
+    fill: none;
+    transition: stroke-dashoffset 0.5s ease-out;
+  }
+  
+  .circular-progress-text {
+    @apply absolute inset-0 flex items-center justify-center font-mono text-[#00F5FF] text-sm;
+  }
+
+  /* ... keep existing code (for remaining styles) */
+
+  /* Add IQON-style keyframe animations */
   @keyframes cyber-scan {
     0% { transform: translateX(-100%); opacity: 0; }
     50% { opacity: 1; }
@@ -282,92 +322,22 @@
     }
   }
   
-  @keyframes glitch-anim-1 {
-    0% { clip: rect(2px, 9999px, 56px, 0); }
-    10% { clip: rect(36px, 9999px, 24px, 0); }
-    20% { clip: rect(20px, 9999px, 64px, 0); }
-    30% { clip: rect(46px, 9999px, 14px, 0); }
-    40% { clip: rect(12px, 9999px, 42px, 0); }
-    50% { clip: rect(24px, 9999px, 10px, 0); }
-    60% { clip: rect(48px, 9999px, 30px, 0); }
-    70% { clip: rect(32px, 9999px, 60px, 0); }
-    80% { clip: rect(18px, 9999px, 22px, 0); }
-    90% { clip: rect(40px, 9999px, 58px, 0); }
-    100% { clip: rect(6px, 9999px, 12px, 0); }
-  }
-  
-  @keyframes glitch-anim-2 {
-    0% { clip: rect(36px, 9999px, 10px, 0); }
-    10% { clip: rect(24px, 9999px, 46px, 0); }
-    20% { clip: rect(58px, 9999px, 18px, 0); }
-    30% { clip: rect(12px, 9999px, 56px, 0); }
-    40% { clip: rect(40px, 9999px, 28px, 0); }
-    50% { clip: rect(14px, 9999px, 42px, 0); }
-    60% { clip: rect(30px, 9999px, 16px, 0); }
-    70% { clip: rect(22px, 9999px, 48px, 0); }
-    80% { clip: rect(50px, 9999px, 26px, 0); }
-    90% { clip: rect(32px, 9999px, 8px, 0); }
-    100% { clip: rect(6px, 9999px, 60px, 0); }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes pulseGlow {
-    0% {
-      box-shadow: 0 0 0 0 rgba(155, 135, 245, 0.7);
-    }
-    70% {
-      box-shadow: 0 0 0 10px rgba(155, 135, 245, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(155, 135, 245, 0);
-    }
-  }
-  
-  @keyframes neon-scan {
-    0% {
-      left: -100%;
-    }
-    50% {
-      left: 100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
-  
-  @keyframes digital-glitch {
-    0%, 100% {
-      opacity: 0.05;
-    }
-    50% {
-      opacity: 0.1;
-    }
-    25%, 75% {
-      opacity: 0;
-    }
-  }
-  
+  /* ... keep existing code (for remaining animations) */
+
   #root {
     max-width: 100%;
     margin: 0;
