@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -794,4 +795,7 @@
 
   /* Card and element borders */
   .border-glow {
-    @apply border border-[#00F5
+    @apply border border-[#00F5FF]/30;
+  }
+}
+
