@@ -1,20 +1,35 @@
+
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
+  React.HTMLAttributes<HTMLDivElement> & {
+    variant?: "default" | "cyber" | "neon-border" | "tech-border" | "brutal"
+  }
+>(({ className, variant = "default", ...props }, ref) => {
+  const baseStyles = "rounded-lg border bg-card text-card-foreground shadow-sm";
+  
+  const variantStyles = {
+    default: baseStyles,
+    cyber: "cyber-card bg-[#0A0E1A]/90 border-[#00F5FF]/30 text-white",
+    "neon-border": "neon-border bg-[#0A0E1A]/90 text-white backdrop-blur-md",
+    "tech-border": "tech-border bg-[#0A0E1A]/90 text-white backdrop-blur-md",
+    brutal: "neobrutalism bg-[#0A0E1A] border-[#00F5FF] text-white"
+  }
+  
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        variantStyles[variant],
+        className
+      )}
+      {...props}
+    />
+  )
+})
 Card.displayName = "Card"
 
 const CardHeader = React.forwardRef<
@@ -31,17 +46,24 @@ CardHeader.displayName = "CardHeader"
 
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
-      className
-    )}
-    {...props}
-  />
-))
+  React.HTMLAttributes<HTMLHeadingElement> & {
+    variant?: "default" | "cyber" | "glitch"
+  }
+>(({ className, variant = "default", ...props }, ref) => {
+  const variantStyles = {
+    default: "text-2xl font-semibold leading-none tracking-tight",
+    cyber: "text-2xl font-bold leading-none tracking-tight cyber-heading",
+    glitch: "text-2xl font-bold leading-none tracking-tight glitch-text"
+  }
+  
+  return (
+    <h3
+      ref={ref}
+      className={cn(variantStyles[variant], className)}
+      {...props}
+    />
+  )
+})
 CardTitle.displayName = "CardTitle"
 
 const CardDescription = React.forwardRef<

@@ -1,52 +1,65 @@
 
 import React from "react";
-import { cn } from "@/lib/utils";
 import BackgroundEffects from "./BackgroundEffects";
 
 interface PageBackgroundProps {
-  variant?: "default" | "subtle" | "vibrant";
-  className?: string;
+  variant?: "default" | "subtle" | "vibrant" | "cyber";
   animated?: boolean;
+  className?: string;
 }
 
-export const PageBackground = ({ 
-  variant = "default",
-  className,
-  animated = true
+const PageBackground = ({ 
+  variant = "default", 
+  animated = true,
+  className
 }: PageBackgroundProps) => {
+  if (variant === "cyber") {
+    return (
+      <div className={`fixed inset-0 z-0 ${className || ''}`}>
+        {/* Dark base */}
+        <div className="absolute inset-0 bg-[#070A14]"></div>
+        
+        {/* Grid background */}
+        <div className="absolute inset-0 cyber-grid opacity-20"></div>
+        
+        {/* Horizontal lines */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(10)].map((_, i) => (
+            <div 
+              key={i} 
+              className="absolute w-full h-[1px] bg-[#00F5FF]/10"
+              style={{ top: `${10 + i * 10}%` }}
+            ></div>
+          ))}
+        </div>
+        
+        {/* Vertical lines */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(10)].map((_, i) => (
+            <div 
+              key={i} 
+              className="absolute h-full w-[1px] bg-[#00F5FF]/10"
+              style={{ left: `${10 + i * 10}%` }}
+            ></div>
+          ))}
+        </div>
+        
+        {/* Glowing spots */}
+        <div className="absolute top-[20%] left-[15%] h-64 w-64 rounded-full bg-[#00F5FF]/5 filter blur-3xl"></div>
+        <div className="absolute bottom-[30%] right-[15%] h-80 w-80 rounded-full bg-[#B026FF]/5 filter blur-3xl"></div>
+        
+        {/* Digital noise overlay */}
+        <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
+        
+        {/* Bottom vignette */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#070A14] to-transparent"></div>
+      </div>
+    );
+  }
+
   return (
-    <div 
-      className={cn("fixed top-0 right-0 w-full h-full pointer-events-none", className)}
-      aria-hidden="true"
-    >
-      {variant === "default" && (
-        <>
-          <div className="absolute top-0 right-0 w-full h-64 bg-gradient-to-b from-[#3a36e0]/15 via-[#9b87f5]/10 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-[#ff4a4a]/8 blur-3xl" />
-          <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-[#9b87f5]/10 blur-3xl" />
-          <div className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-[#3a36e0]/10 blur-3xl" />
-        </>
-      )}
-      
-      {variant === "subtle" && (
-        <>
-          <div className="absolute top-0 right-0 w-full h-48 bg-gradient-to-b from-[#3a36e0]/10 via-[#9b87f5]/5 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-[#ff4a4a]/5 blur-3xl" />
-          <div className="absolute top-40 right-40 w-56 h-56 rounded-full bg-[#9b87f5]/5 blur-3xl" />
-        </>
-      )}
-      
-      {variant === "vibrant" && (
-        <>
-          <div className="absolute top-0 right-0 w-full h-96 bg-gradient-to-b from-[#3a36e0]/20 via-[#9b87f5]/15 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[#ff4a4a]/15 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-          <div className="absolute top-10 right-10 w-96 h-96 rounded-full bg-[#9b87f5]/15 blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-[30rem] h-[30rem] rounded-full bg-[#3a36e0]/15 blur-3xl animate-pulse" style={{ animationDuration: '12s' }} />
-          <div className="absolute -top-40 -left-20 w-[40rem] h-[40rem] rounded-full bg-[#6e59A5]/10 blur-3xl" />
-        </>
-      )}
-      
-      {animated && <BackgroundEffects variant={variant} />}
+    <div className={`fixed inset-0 z-0 ${className || ''}`}>
+      <BackgroundEffects variant={variant} animated={animated} />
     </div>
   );
 };

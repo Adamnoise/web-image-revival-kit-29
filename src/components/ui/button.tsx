@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -18,6 +19,11 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // New cyberpunk variants
+        cyber: "bg-transparent border border-[#00F5FF] text-[#00F5FF] hover:bg-[#00F5FF]/10 hover:shadow-glow-blue-sm transition-all duration-300",
+        "cyber-filled": "bg-[#00F5FF] text-[#070A14] hover:bg-[#00F5FF]/90 hover:shadow-glow-blue-sm transition-all duration-300",
+        "cyber-purple": "bg-transparent border border-[#B026FF] text-[#B026FF] hover:bg-[#B026FF]/10 hover:shadow-glow-purple-sm transition-all duration-300",
+        "cyber-yellow": "bg-transparent border border-[#FAFF00] text-[#FAFF00] hover:bg-[#FAFF00]/10 hover:shadow-glow-yellow-sm transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

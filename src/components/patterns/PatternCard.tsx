@@ -1,262 +1,156 @@
 
-import React, { useState, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
+import { LucideIcon } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Zap } from "lucide-react";
 
 interface PatternCardProps {
   title: string;
   description: string;
+  icon: LucideIcon;
+  index: number;
   color: string;
   secondaryColor?: string;
-  index: number;
-  icon?: React.ReactNode;
   complexity?: number;
   count?: number;
   effectivity?: number;
+  className?: string;
 }
 
-const PatternCard = ({ 
-  title, 
-  description, 
-  color, 
-  secondaryColor, 
-  index, 
-  icon, 
-  complexity = 5,
+const PatternCard = ({
+  title,
+  description,
+  icon: Icon,
+  index,
+  color,
+  secondaryColor = "#B026FF",
+  complexity = 3,
   count = 0,
-  effectivity = 0
+  effectivity = 0,
+  className
 }: PatternCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  // 3D rotation effect variables
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [10, -10]);
-  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
-  
-  // Spring physics for smoother rotation
-  const springConfig = { damping: 20, stiffness: 200 };
-  const springRotateX = useSpring(rotateX, springConfig);
-  const springRotateY = useSpring(rotateY, springConfig);
-  
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    
-    // Calculate cursor position relative to card center
-    const xValue = e.clientX - rect.left - width / 2;
-    const yValue = e.clientY - rect.top - height / 2;
-    
-    // Update motion values
-    x.set(xValue);
-    y.set(yValue);
-  };
-  
-  const resetCardPosition = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  // Generate a path for the circuit lines based on the card's properties
-  const generateCircuitPath = () => {
-    const baseComplexity = Math.min(complexity, 10) / 10; // Normalized 0-1
-    const paths = [
-      `M10,${50 + baseComplexity * 20} L${30 + baseComplexity * 10},${50 - baseComplexity * 10} L${30 + baseComplexity * 20},20 L${60 + baseComplexity * 20},${20 + baseComplexity * 5} L${60 + baseComplexity * 10},${40 - baseComplexity * 10} L90,${40 + baseComplexity * 20}`,
-      `M20,90 L20,${70 + baseComplexity * 10} L${40 + baseComplexity * 15},${70 - baseComplexity * 5} L${40 + baseComplexity * 5},${50 + baseComplexity * 10} L${70 - baseComplexity * 10},${50 - baseComplexity * 5} L${70 + baseComplexity * 5},${80 + baseComplexity * 10} L90,${80 - baseComplexity * 15}`
-    ];
-    return paths;
-  };
-
-  const circuitPaths = generateCircuitPath();
-  
   return (
     <motion.div
-      ref={cardRef}
-      className={cn(
-        "relative h-[320px] w-full overflow-hidden rounded-md",
-        "hover:shadow-2xl transition-all duration-300 cursor-pointer",
-        "border-4 border-black dark:border-[#111] group"
-      )}
-      style={{
-        backgroundColor: `${color}11`,
-        boxShadow: isPressed 
-          ? `3px 3px 0 0 rgba(0, 0, 0, 0.8)` 
-          : `${8 + index % 4}px ${8 + index % 4}px 0 0 rgba(0, 0, 0, 0.8)`,
-        transform: isPressed ? 'translateY(4px) translateX(4px)' : 'none',
-        rotateX: springRotateX,
-        rotateY: springRotateY,
-        perspective: 1000
-      }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ 
-        type: "spring",
-        stiffness: 300, 
-        damping: 20,
-        delay: index * 0.1 
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        resetCardPosition();
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+      className={className}
     >
-      {/* Background gradient and effects */}
-      <div 
-        className="absolute inset-0 opacity-20 transition-opacity duration-500"
-        style={{ 
-          opacity: isHovered ? 0.3 : 0.1,
-          background: `radial-gradient(circle at center, ${color}99, transparent 70%)`,
-        }}
-      />
-      
-      {/* Digital noise overlay */}
-      <div className="absolute inset-0 opacity-5 bg-noise mix-blend-overlay pointer-events-none"></div>
-      
-      {/* Glow effect border */}
-      <div 
-        className="absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none"
-        style={{ 
-          opacity: isHovered ? 0.6 : 0,
-          boxShadow: `inset 0 0 30px ${color}`,
-        }}
-      />
-      
-      {/* Card content */}
-      <div className="p-6 h-full flex flex-col relative z-10">
-        {/* Card icon */}
-        <motion.div 
-          className="flex items-center justify-center w-16 h-16 mb-6 rounded"
-          style={{ 
-            background: isHovered ? color : `${color}22`,
-          }}
-          animate={{ 
-            rotate: isHovered ? [0, -5, 5, -3, 3, 0] : 0,
-            scale: isHovered ? 1.1 : 1
-          }}
-          transition={{
-            rotate: { duration: 0.5, ease: "easeInOut" },
-            scale: { duration: 0.2 }
+      <Card className="overflow-hidden cyber-card h-full flex flex-col">
+        {/* Card header with neon border */}
+        <div
+          className="p-6 relative"
+          style={{
+            backgroundImage: `radial-gradient(circle at top right, ${color}20, transparent 70%)`
           }}
         >
-          {icon}
-        </motion.div>
-        
-        {/* Card content */}
-        <motion.div animate={{ y: isHovered ? -8 : 0 }} transition={{ duration: 0.2 }}>
-          <h3 
-            className="text-xl font-bold mb-2 transition-all duration-300"
-            style={{ color: isHovered ? color : 'white' }}
-          >
-            {title}
-          </h3>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
+            style={{ backgroundImage: `linear-gradient(to right, ${color}, ${secondaryColor})` }}
+          ></div>
           
-          <p className="text-sm text-white/70 mb-5">{description}</p>
-        </motion.div>
-        
-        {/* Pattern stats - only visible on hover */}
-        <motion.div 
-          className="mt-auto grid grid-cols-2 gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
-          transition={{ duration: 0.3 }}
-        >
-          {count > 0 && (
-            <div className="rounded bg-black/20 p-2 backdrop-blur-sm">
-              <div className="text-xs text-white/50">Pattern Count</div>
-              <div className="font-mono text-lg font-bold" style={{ color: color }}>
-                {count}
-              </div>
+          <div className="flex items-start justify-between">
+            <div 
+              className="h-12 w-12 rounded-md flex items-center justify-center mb-4"
+              style={{ 
+                backgroundColor: `${color}20`,
+                border: `1px solid ${color}40`,
+                boxShadow: `0 0 15px ${color}30` 
+              }}
+            >
+              <Icon className="h-6 w-6" style={{ color: color }} />
             </div>
-          )}
+            
+            {count > 0 && (
+              <Badge 
+                variant="outline" 
+                className="bg-[#070A14]/80 border"
+                style={{ borderColor: `${color}40`, color: color }}
+              >
+                {count} patterns
+              </Badge>
+            )}
+          </div>
           
-          {effectivity > 0 && (
-            <div className="rounded bg-black/20 p-2 backdrop-blur-sm">
-              <div className="text-xs text-white/50">Effectiveness</div>
-              <div className="font-mono text-lg font-bold flex items-center" style={{ color: color }}>
-                {effectivity}%
-                <Zap className="h-3 w-3 ml-1" />
-              </div>
-            </div>
-          )}
-        </motion.div>
-        
-        {/* Circuit board lines */}
-        <div className="absolute bottom-0 right-0 w-3/4 h-1/2 opacity-20 pointer-events-none">
-          <svg 
-            width="100%" 
-            height="100%" 
-            viewBox="0 0 100 100" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ stroke: color }}
-          >
-            {circuitPaths.map((path, i) => (
-              <motion.path 
-                key={i}
-                d={path} 
-                strokeWidth="1"
-                strokeDasharray="3 2" 
-                initial={{ pathLength: 0, opacity: 0.3 }}
-                animate={{ 
-                  pathLength: isHovered ? 1 : 0.4, 
-                  opacity: isHovered ? 0.8 : 0.3 
-                }}
-                transition={{ duration: 1.5, delay: i * 0.2 }}
-              />
-            ))}
-            <motion.circle cx="30" cy="50" r="2" fill={color} animate={{ r: isHovered ? 3 : 2, opacity: isHovered ? 0.8 : 0.5 }} />
-            <motion.circle cx="60" cy="20" r="2" fill={color} animate={{ r: isHovered ? 3 : 2, opacity: isHovered ? 0.8 : 0.5 }} />
-            <motion.circle cx="40" cy="70" r="2" fill={color} animate={{ r: isHovered ? 3 : 2, opacity: isHovered ? 0.8 : 0.5 }} />
-            <motion.circle cx="70" cy="50" r="2" fill={color} animate={{ r: isHovered ? 3 : 2, opacity: isHovered ? 0.8 : 0.5 }} />
-          </svg>
+          <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
+          <p className="text-sm text-white/70">{description}</p>
         </div>
         
-        {/* Scan line effect */}
-        <motion.div 
-          className="absolute bottom-0 left-0 right-0 h-[80%] pointer-events-none"
-          style={{
-            background: `linear-gradient(to bottom, transparent 50%, ${color}22 51%, transparent 52%)`,
-            backgroundSize: '100% 8px',
-          }}
-          animate={{ 
-            y: [0, -100], 
-            opacity: isHovered ? [0.1, 0.2, 0.1] : 0 
-          }}
-          transition={{ 
-            y: { repeat: Infinity, duration: 3, ease: "linear" },
-            opacity: { duration: 0.3 } 
-          }}
-        />
+        {/* Card metrics */}
+        <CardContent className="pt-4 pb-0 flex-1">
+          <div className="space-y-3">
+            {/* Complexity meter */}
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-white/50">Complexity</span>
+                <span 
+                  className="font-mono"
+                  style={{ color }}
+                >
+                  {complexity}/5
+                </span>
+              </div>
+              <div className="h-1.5 bg-[#1A1E2E] rounded-full overflow-hidden flex">
+                {[...Array(5)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="h-full flex-1 mx-0.5 first:ml-0 last:mr-0 rounded-full transition-all"
+                    style={{ 
+                      backgroundColor: i < complexity ? color : 'transparent',
+                      boxShadow: i < complexity ? `0 0 8px ${color}` : 'none'
+                    }}
+                  ></div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Effectivity meter */}
+            {effectivity > 0 && (
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-white/50">Effectivity</span>
+                  <span 
+                    className="font-mono"
+                    style={{ color: secondaryColor }}
+                  >
+                    {effectivity}%
+                  </span>
+                </div>
+                <div className="h-1.5 bg-[#1A1E2E] rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${effectivity}%` }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    style={{ 
+                      backgroundImage: `linear-gradient(to right, ${color}, ${secondaryColor})`,
+                      boxShadow: `0 0 8px ${secondaryColor}`
+                    }}
+                  ></motion.div>
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
         
-        {/* Digital pulse at the bottom */}
-        <motion.div 
-          className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r"
-          style={{
-            backgroundImage: `linear-gradient(to right, transparent, ${color}, transparent)`,
-          }}
-          animate={{ 
-            scaleX: isHovered ? [0, 1, 0] : 0,
-            x: isHovered ? ["-100%", "100%"] : "-100%",
-            opacity: isHovered ? 0.8 : 0
-          }}
-          transition={{ 
-            duration: 2,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </div>
+        <CardFooter className="pt-4">
+          <div className="w-full flex justify-between items-center border-t border-dashed border-white/10 pt-4">
+            <div className="flex items-center gap-2 text-xs text-white/50">
+              <div 
+                className="h-1.5 w-1.5 rounded-full animate-pulse"
+                style={{ backgroundColor: color }}
+              ></div>
+              <span>ACTIVE</span>
+            </div>
+            
+            <div className="text-xs font-mono" style={{ color: secondaryColor }}>
+              ID: {(index + 1).toString().padStart(2, '0')}
+            </div>
+          </div>
+        </CardFooter>
+      </Card>
     </motion.div>
   );
 };
