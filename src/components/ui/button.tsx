@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-white hover:bg-primary/90 transition-all duration-300",
+        default: "bg-[#3b82f6] text-white hover:bg-[#3b82f6]/90 transition-all duration-300",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -19,14 +19,16 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // Simplified variants
-        cyber: "bg-transparent border border-primary text-primary hover:bg-primary/10 transition-all duration-300",
-        "cyber-filled": "bg-primary text-white hover:bg-primary/90 transition-all duration-300",
-        "cyber-purple": "bg-transparent border border-purple-600 text-purple-600 hover:bg-purple-600/10 transition-all duration-300",
-        "cyber-yellow": "bg-transparent border border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 transition-all duration-300",
-        "iqon-primary": "bg-[#111420] border border-primary/50 text-primary hover:bg-primary/10 transition-all duration-300",
-        "iqon-secondary": "bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300",
-        "iqon-accent": "bg-gradient-to-r from-primary to-primary/80 text-white font-medium transition-all duration-300",
+        // New cyberpunk variants
+        cyber: "bg-transparent border border-[#00F5FF] text-[#00F5FF] hover:bg-[#00F5FF]/10 hover:shadow-glow-blue-sm transition-all duration-300",
+        "cyber-filled": "bg-[#00F5FF] text-[#070A14] hover:bg-[#00F5FF]/90 hover:shadow-glow-blue-sm transition-all duration-300",
+        "cyber-purple": "bg-transparent border border-[#B026FF] text-[#B026FF] hover:bg-[#B026FF]/10 hover:shadow-glow-purple-sm transition-all duration-300",
+        "cyber-yellow": "bg-transparent border border-[#FAFF00] text-[#FAFF00] hover:bg-[#FAFF00]/10 hover:shadow-glow-yellow-sm transition-all duration-300",
+        // New IQON-style buttons
+        "iqon-primary": "bg-[#070A14] border border-[#00F5FF]/50 text-[#00F5FF] hover:bg-[#00F5FF]/10 hover:shadow-glow-blue-sm transition-all duration-300",
+        "iqon-secondary": "bg-[#00F5FF]/10 text-[#00F5FF] hover:bg-[#00F5FF]/20 hover:shadow-glow-blue-sm transition-all duration-300",
+        "iqon-accent": "bg-gradient-to-r from-[#00F5FF] to-[#0099FF] text-[#070A14] font-medium hover:shadow-glow-blue-sm transition-all duration-300",
+        // New icon button from brandbook
         "icon-round": "h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors duration-300",
       },
       size: {

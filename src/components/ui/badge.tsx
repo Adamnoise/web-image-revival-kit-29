@@ -16,24 +16,24 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        // Simplified variants based on Orbit Dashboard
+        // Cyber variants with the updated colors
         cyber: 
-          "border border-primary text-primary bg-primary/5 hover:bg-primary/10",
+          "border border-[#00F5FF] text-[#00F5FF] bg-[#00F5FF]/5 hover:bg-[#00F5FF]/10 hover:shadow-glow-blue-sm",
         "cyber-purple":
-          "border border-purple-500 text-purple-500 bg-purple-500/5 hover:bg-purple-500/10",
+          "border border-[#B026FF] text-[#B026FF] bg-[#B026FF]/5 hover:bg-[#B026FF]/10 hover:shadow-glow-purple-sm",
         "cyber-yellow":
-          "border border-yellow-400 text-yellow-400 bg-yellow-400/5 hover:bg-yellow-400/10",
+          "border border-[#FAFF00] text-[#FAFF00] bg-[#FAFF00]/5 hover:bg-[#FAFF00]/10 hover:shadow-glow-yellow-sm",
         "cyber-pill":
-          "border border-primary text-primary bg-[#111420] px-3 py-1 backdrop-blur-sm",
-        // New variants
+          "border border-[#00F5FF] text-[#00F5FF] bg-[#070A14] px-3 py-1 backdrop-blur-sm",
+        // New variants from the brandbook
         "blue": 
-          "border-transparent bg-blue-500 text-white hover:bg-blue-500/90",
+          "border-transparent bg-[#3b82f6] text-white hover:bg-[#3b82f6]/90",
         "red": 
-          "border-transparent bg-red-500 text-white hover:bg-red-500/90",
+          "border-transparent bg-[#ef4444] text-white hover:bg-[#ef4444]/90 animate-pulse",
         "green": 
-          "border-transparent bg-green-500 text-white hover:bg-green-500/90",
+          "border-transparent bg-[#10b981] text-white hover:bg-[#10b981]/90",
         glitch:
-          "border border-primary text-primary bg-primary/5",
+          "border border-[#00F5FF] text-[#00F5FF] bg-[#00F5FF]/5 animate-glitch",
       },
     },
     defaultVariants: {
