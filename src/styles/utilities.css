@@ -1,0 +1,105 @@
+
+@tailwind utilities;
+
+@layer utilities {
+  /* Animation utilities */
+  .hover-scale {
+    @apply transition-transform hover:scale-105 duration-300;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+  
+  .pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+  
+  .hover-glow {
+    @apply hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-shadow duration-300;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 245, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 245, 255, 0.5);
+  }
+
+  /* Button glow effect */
+  .btn-glow:hover {
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+  }
+
+  /* Enhanced background gradients */
+  .bg-gradient-blue-purple {
+    @apply bg-gradient-to-br from-[#00F5FF] to-[#B026FF];
+  }
+
+  .bg-gradient-blue-purple-subtle {
+    @apply bg-gradient-to-br from-[#00F5FF]/30 to-[#B026FF]/20;
+  }
+
+  /* Motion effects */
+  .hover-float {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-expand {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  /* Card and element borders */
+  .border-glow {
+    @apply border border-[#00F5FF]/30;
+  }
+
+  .border-glow-hover:hover {
+    @apply border-[#00F5FF]/50 shadow-[0_0_10px_rgba(0,245,255,0.3)];
+  }
+
+  /* Digital effects */
+  .digital-noise {
+    @apply relative overflow-hidden;
+  }
+  
+  .digital-noise::after {
+    @apply content-[''] absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay pointer-events-none;
+    animation: noise 8s steps(10) infinite;
+  }
+
+  /* Neobrutalism styles */
+  .neobrutalism {
+    @apply border-4 border-black relative shadow-brutal-md transition-all duration-300;
+  }
+  
+  .neobrutalism:hover {
+    @apply shadow-brutal-lg transform translate-x-[-2px] translate-y-[-2px];
+  }
+
+  /* Additional utility classes */
+  .hover-shadow-lg {
+    @apply transition-shadow duration-300 hover:shadow-lg;
+  }
+
+  .focus-glow {
+    @apply focus:ring-2 focus:ring-[#9b87f5] focus:ring-opacity-50;
+  }
+}

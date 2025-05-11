@@ -1,0 +1,81 @@
+
+@layer components {
+  /* IQON-inspired styles */
+  .iqon-card {
+    @apply bg-[#070A14] border border-[#00F5FF]/20 rounded-xl overflow-hidden shadow-md
+      hover:shadow-[0_0_15px_rgba(0,245,255,0.2)] transition-all duration-300;
+  }
+  
+  .iqon-gauge {
+    @apply relative flex items-center justify-center;
+  }
+  
+  .iqon-gauge-bg {
+    @apply absolute inset-0 bg-[#00F5FF]/5 rounded-full;
+  }
+  
+  .iqon-gauge-progress {
+    @apply absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#00F5FF] to-[#4ECDC4] rounded-b-full;
+  }
+  
+  .iqon-status {
+    @apply flex items-center gap-2;
+  }
+  
+  .iqon-status-dot {
+    @apply h-2 w-2 rounded-full animate-pulse;
+  }
+  
+  .iqon-status-dot.active {
+    @apply bg-[#00F5FF];
+  }
+  
+  .iqon-status-dot.warning {
+    @apply bg-[#FAFF00];
+  }
+  
+  .iqon-status-dot.error {
+    @apply bg-[#FF3A5E];
+  }
+  
+  .iqon-progress {
+    @apply h-1.5 bg-[#0F1122]/80 rounded-full overflow-hidden;
+  }
+  
+  .iqon-progress-bar {
+    @apply h-full bg-gradient-to-r from-[#00F5FF] to-[#4ECDC4] rounded-full;
+  }
+  
+  .iqon-badge {
+    @apply border border-[#00F5FF]/30 text-[#00F5FF] text-xs px-1.5 py-0.5 rounded-sm bg-[#00F5FF]/10;
+  }
+  
+  /* Enhancement for circular progress indicator */
+  .circular-progress {
+    @apply relative;
+  }
+  
+  .circular-progress-circle {
+    @apply h-full w-full rounded-full;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  
+  .circular-progress-bg {
+    @apply stroke-[#0F1122];
+    stroke-width: 8;
+    fill: none;
+  }
+  
+  .circular-progress-value {
+    @apply stroke-[#00F5FF];
+    stroke-width: 8;
+    fill: none;
+    transition: stroke-dashoffset 0.5s ease-out;
+  }
+  
+  .circular-progress-text {
+    @apply absolute inset-0 flex items-center justify-center font-mono text-[#00F5FF] text-sm;
+  }
+}
