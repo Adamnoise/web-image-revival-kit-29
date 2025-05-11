@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import AppLayout from "@/components/common/AppLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"; // CardDescription hozzáadva, ha használni akarod
 import { Separator } from "@/components/ui/separator";
 import {
   Calendar,
@@ -15,7 +14,10 @@ import {
   Bell,
   Trophy,
   Brain,
-  Palette
+  Palette,
+  Activity,      // ÚJ Dashboard ikon
+  BarChart2,     // ÚJ Dashboard ikon
+  CalendarDays   // ÚJ Dashboard ikon
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
@@ -30,7 +32,7 @@ const Brandbook = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold">Brandbook</h1>
-          <p className="text-gray-400">Design system and UI components</p>
+          <p className="text-gray-400">Design system, UI components, and page examples</p>
         </div>
       </div>
 
@@ -41,6 +43,7 @@ const Brandbook = () => {
           <TabsTrigger value="components">Components</TabsTrigger>
           <TabsTrigger value="icons">Icons</TabsTrigger>
           <TabsTrigger value="animation">Animation</TabsTrigger>
+          <TabsTrigger value="dashboard">Dashboard Example</TabsTrigger> {/* ÚJ FÜL */}
         </TabsList>
 
         <TabsContent value="colors" className="mt-6 space-y-8">
@@ -271,6 +274,69 @@ const Brandbook = () => {
             </div>
           </div>
         </TabsContent>
+
+        {/* ÚJ DASHBOARD TARTALOM */}
+        <TabsContent value="dashboard" className="mt-6 space-y-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-8 w-8 rounded-md bg-[#3b82f6]/80 flex items-center justify-center">
+              <BarChart2 className="h-4 w-4 text-white" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">Dashboard Example</h2>
+              <p className="text-sm text-gray-400">An example dashboard layout using defined components.</p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card variant="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Recent Activity</CardTitle>
+                <Activity className="h-4 w-4 text-gray-400" />
+              </CardHeader>
+              <CardContent>
+                {/* Optional: <CardDescription className="text-xs text-gray-500">Your recent predictions and results</CardDescription> */}
+                <p className="text-sm text-gray-300 pt-2">No recent activities yet.</p>
+              </CardContent>
+            </Card>
+            
+            <Card variant="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Performance</CardTitle>
+                <BarChart2 className="h-4 w-4 text-gray-400" />
+              </CardHeader>
+              <CardContent>
+                {/* Optional: <CardDescription className="text-xs text-gray-500">Your prediction accuracy</CardDescription> */}
+                <div className="flex flex-col gap-2 pt-2">
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-300">Win rate:</span>
+                    <span className="font-medium text-white">0%</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-300">Predictions made:</span>
+                    <span className="font-medium text-white">0</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-300">Total points:</span>
+                    <span className="font-medium text-white">0</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card variant="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Upcoming Events</CardTitle>
+                <CalendarDays className="h-4 w-4 text-gray-400" />
+              </CardHeader>
+              <CardContent>
+                {/* Optional: <CardDescription className="text-xs text-gray-500">Matches available for predictions</CardDescription> */}
+                <p className="text-sm text-gray-300 pt-2">No upcoming events at the moment.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+        {/* ÚJ DASHBOARD TARTALOM VÉGE */}
+
       </Tabs>
     </AppLayout>
   );
