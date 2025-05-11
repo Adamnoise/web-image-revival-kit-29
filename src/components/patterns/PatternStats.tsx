@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { Sparkles, Network, Zap, Bar } from "lucide-react";
+import { Sparkles, Network, Zap, BarChart } from "lucide-react";
 
 // Sample data for the charts
 const patternData = [
@@ -211,7 +211,7 @@ const PatternStats = () => {
           <StatsBox 
             title="Average duration" 
             value={12} 
-            icon={Bar} 
+            icon={BarChart} 
             color="#FAFF00" 
           />
         </div>

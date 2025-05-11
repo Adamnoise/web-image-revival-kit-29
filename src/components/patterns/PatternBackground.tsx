@@ -11,7 +11,7 @@ import {
 } from "@react-three/drei";
 import { Vector3, Color } from "three";
 import { useMotionValue, useTransform, useSpring } from "framer-motion";
-import { motion } from "framer-motion-3d";
+import { motion } from "framer-motion";
 
 // Animated sphere component with distortion and color effects
 const AnimatedSphere = ({ position, size, speed, distort, color1, color2, mouseX, mouseY }) => {
