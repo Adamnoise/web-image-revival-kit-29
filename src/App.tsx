@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LeagueManagement from "./pages/LeagueManagement";
 import PatternsPage from "./pages/Patterns";
+import Brandbook from "./pages/Brandbook";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/integrations" element={<Index />} />
           <Route path="/predictions" element={<Index />} />
           <Route path="/settings" element={<Index />} />
+          <Route path="/brandbook" element={<Brandbook />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -6,7 +6,7 @@ import PageBackground from "./PageBackground";
 
 interface AppLayoutProps {
   children: React.ReactNode;
-  backgroundVariant?: "default" | "subtle" | "vibrant" | "cyber";
+  backgroundVariant?: "default" | "subtle" | "vibrant" | "cyber" | "gradient";
   contentClassName?: string;
   headerTitle?: string;
 }
@@ -34,7 +34,11 @@ export const AppLayout = ({
         <AppSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         
         <main className={`flex-1 overflow-auto relative ${contentClassName || ""}`}>
-          <PageBackground variant={backgroundVariant} animated={true} />
+          {backgroundVariant === "gradient" ? (
+            <div className="fixed inset-0 z-0 bg-gradient-to-b from-gray-900/95 via-gray-900/98 to-black"></div>
+          ) : (
+            <PageBackground variant={backgroundVariant} animated={true} />
+          )}
           
           {/* Circuit pattern overlay */}
           <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none z-0"></div>

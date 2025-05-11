@@ -10,11 +10,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-[#3b82f6] text-white hover:bg-[#3b82f6]/90 transition-all duration-300",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-white/10 bg-black/20 hover:bg-white/5 text-white transition-all duration-300",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
@@ -28,6 +28,8 @@ const buttonVariants = cva(
         "iqon-primary": "bg-[#070A14] border border-[#00F5FF]/50 text-[#00F5FF] hover:bg-[#00F5FF]/10 hover:shadow-glow-blue-sm transition-all duration-300",
         "iqon-secondary": "bg-[#00F5FF]/10 text-[#00F5FF] hover:bg-[#00F5FF]/20 hover:shadow-glow-blue-sm transition-all duration-300",
         "iqon-accent": "bg-gradient-to-r from-[#00F5FF] to-[#0099FF] text-[#070A14] font-medium hover:shadow-glow-blue-sm transition-all duration-300",
+        // New icon button from brandbook
+        "icon-round": "h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

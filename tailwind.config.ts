@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -65,8 +66,11 @@ export default {
         // New neon colors
         neon: {
           cyan: '#00F5FF',
+          blue: '#3b82f6',  // Added from Brandbook
           purple: '#B026FF',
           yellow: '#FAFF00',
+          red: '#ef4444',   // Added from Brandbook
+          green: '#10b981', // Added from Brandbook
         }
       },
       borderRadius: {

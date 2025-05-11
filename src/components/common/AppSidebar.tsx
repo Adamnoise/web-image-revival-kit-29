@@ -10,7 +10,8 @@ import {
   Settings, 
   Zap, 
   Network, 
-  X
+  X,
+  Palette
 } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -87,10 +88,28 @@ const AppSidebar = ({ isOpen, toggleSidebar }: AppSidebarProps) => {
           </h3>
           
           <Link 
-            to="/settings"
-            className="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-white/70 hover:bg-[#00F5FF]/5 hover:text-white transition-all duration-200 group"
+            to="/brandbook"
+            className={cn(
+              "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 group",
+              location.pathname === "/brandbook" 
+                ? "bg-[#00F5FF]/10 text-[#00F5FF] border-l-2 border-[#00F5FF]" 
+                : "text-white/70 hover:bg-[#00F5FF]/5 hover:text-white border-l-2 border-transparent"
+            )}
           >
-            <Settings size={18} className="group-hover:text-[#00F5FF]/70" />
+            <Palette size={18} className={location.pathname === "/brandbook" ? "text-[#00F5FF]" : "group-hover:text-[#00F5FF]/70"} />
+            <span>Design System</span>
+          </Link>
+          
+          <Link 
+            to="/settings"
+            className={cn(
+              "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-white/70 hover:bg-[#00F5FF]/5 hover:text-white transition-all duration-200 group",
+              location.pathname === "/settings" 
+                ? "bg-[#00F5FF]/10 text-[#00F5FF] border-l-2 border-[#00F5FF]" 
+                : "text-white/70 hover:bg-[#00F5FF]/5 hover:text-white border-l-2 border-transparent"
+            )}
+          >
+            <Settings size={18} className={location.pathname === "/settings" ? "text-[#00F5FF]" : "group-hover:text-[#00F5FF]/70"} />
             <span>Settings</span>
           </Link>
         </div>
