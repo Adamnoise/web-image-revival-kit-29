@@ -9,16 +9,16 @@ const Card = React.forwardRef<
     variant?: "default" | "cyber" | "neon-border" | "tech-border" | "brutal" | "glass" | "live"
   }
 >(({ className, variant = "default", ...props }, ref) => {
-  const baseStyles = "rounded-xl border bg-card text-card-foreground shadow-sm";
+  const baseStyles = "rounded-lg border bg-card text-card-foreground shadow-sm";
   
   const variantStyles = {
     default: baseStyles,
-    glass: "rounded-xl bg-black/20 border border-white/10 backdrop-blur-md shadow-lg",
-    cyber: "cyber-card bg-[#0A0E1A]/90 border-[#00F5FF]/30 text-white",
-    "neon-border": "neon-border bg-[#0A0E1A]/90 text-white backdrop-blur-md",
-    "tech-border": "tech-border bg-[#0A0E1A]/90 text-white backdrop-blur-md",
-    brutal: "neobrutalism bg-[#0A0E1A] border-[#00F5FF] text-white",
-    live: "rounded-xl overflow-hidden bg-black/20 border border-white/10 shadow-lg"
+    glass: "rounded-lg bg-black/20 border border-white/10 backdrop-blur-md shadow-md",
+    cyber: "bg-[#111420]/90 border border-white/10 text-white rounded-lg",
+    "neon-border": "bg-[#111420]/90 border border-primary/30 text-white rounded-lg backdrop-blur-md",
+    "tech-border": "bg-[#111420]/90 border border-white/10 text-white rounded-lg backdrop-blur-md",
+    brutal: "bg-[#111420] border border-primary/30 text-white rounded-lg",
+    live: "rounded-lg overflow-hidden bg-black/20 border border-white/10 shadow-md"
   }
   
   return (
@@ -63,8 +63,8 @@ const CardTitle = React.forwardRef<
 >(({ className, variant = "default", ...props }, ref) => {
   const variantStyles = {
     default: "text-2xl font-semibold leading-none tracking-tight",
-    cyber: "text-2xl font-bold leading-none tracking-tight cyber-heading",
-    glitch: "text-2xl font-bold leading-none tracking-tight glitch-text"
+    cyber: "text-2xl font-bold leading-none tracking-tight text-primary",
+    glitch: "text-2xl font-bold leading-none tracking-tight text-white"
   }
   
   return (
